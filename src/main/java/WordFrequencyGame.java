@@ -15,16 +15,16 @@ public class WordFrequencyGame {
 
             Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
             List<Input> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
-
-            StringJoiner joiner = new StringJoiner("\n");
-            for (Input w : sortedWordFrequencies) {
-                String s = w.getValue() + " " + w.getWordCount();
-                joiner.add(s);
-            }
-            return joiner.toString();
+            return formatResult(sortedWordFrequencies);
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private String formatResult(List<Input> wordFrequencies) {
+        return wordFrequencies.stream()
+                .map(input -> input.getValue() + " " + input.getWordCount())
+                .collect(Collectors.joining("\n"));
     }
 
     private static List<Input> createSortedWordFrequencies(Map<String, Long> wordFrequencyMap) {
