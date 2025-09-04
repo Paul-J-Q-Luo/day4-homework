@@ -14,7 +14,7 @@ public class WordFrequencyGame {
             }
 
             Map<String, Long> wordFrequencyMap = countFrequencies(words);
-            List<Input> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
+            List<WordFrequency> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
             return composeOutput(sortedWordFrequencies);
         } catch (Exception e) {
             return "Calculate Error";
@@ -25,16 +25,16 @@ public class WordFrequencyGame {
         return inputStr + " 1";
     }
 
-    private String composeOutput(List<Input> wordFrequencies) {
+    private String composeOutput(List<WordFrequency> wordFrequencies) {
         return wordFrequencies.stream()
-                .map(input -> input.getValue() + " " + input.getWordCount())
+                .map(wordFrequency -> wordFrequency.word() + " " + wordFrequency.count())
                 .collect(Collectors.joining("\n"));
     }
 
-    private static List<Input> createSortedWordFrequencies(Map<String, Long> wordFrequencyMap) {
+    private static List<WordFrequency> createSortedWordFrequencies(Map<String, Long> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
-                .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
-                .sorted((input1, input2) -> Integer.compare(input2.getWordCount(), input1.getWordCount()))
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().intValue()))
+                .sorted((freq1, freq2) -> Integer.compare(freq2.count(), freq1.count()))
                 .toList();
     }
 
@@ -44,5 +44,8 @@ public class WordFrequencyGame {
 
     private String[] splitInputString(String inputStr) {
         return inputStr.split(WHITESPACE_REGEX);
+    }
+
+    private record WordFrequency(String word, int count) {
     }
 }
