@@ -10,7 +10,7 @@ public class WordFrequencyGame {
         try {
             String[] words = splitInputString(inputStr);
             if (words.length == 1) {
-                return inputStr + " 1";
+                return formatSingleWordResult(inputStr);
             }
 
             Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
@@ -19,6 +19,10 @@ public class WordFrequencyGame {
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private static String formatSingleWordResult(String inputStr) {
+        return inputStr + " 1";
     }
 
     private String formatResult(List<Input> wordFrequencies) {
