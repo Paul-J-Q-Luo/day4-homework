@@ -13,16 +13,11 @@ public class WordFrequencyGame {
                 return inputStr + " 1";
             }
 
-            List<Input> inputList;
             Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
-            List<Input> list = new ArrayList<>();
-            for (Map.Entry<String, Long> entry : wordFrequencyMap.entrySet()) {
-                Input input = new Input(entry.getKey(), entry.getValue().intValue());
-                list.add(input);
-            }
-            inputList = list;
-
-            inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            List<Input> inputList = wordFrequencyMap.entrySet().stream()
+                    .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
+                    .sorted((input1, input2) -> Integer.compare(input2.getWordCount(), input1.getWordCount()))
+                    .toList();
 
             StringJoiner joiner = new StringJoiner("\n");
             for (Input w : inputList) {
