@@ -6,13 +6,13 @@ public class WordFrequencyGame {
 
     public String getResult(String inputStr) {
         try {
-            String[] arr = splitInputString(inputStr);
-            if (arr.length == 1) {
+            String[] words = splitInputString(inputStr);
+            if (words.length == 1) {
                 return inputStr + " 1";
             }
 
             List<Input> inputList = new ArrayList<>();
-            for (String s : arr) {
+            for (String s : words) {
                 Input input = new Input(s, 1);
                 inputList.add(input);
             }
