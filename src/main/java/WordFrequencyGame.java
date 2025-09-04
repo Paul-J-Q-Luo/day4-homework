@@ -14,9 +14,9 @@ public class WordFrequencyGame {
             }
 
             List<Input> inputList;
-            Map<String, Long> map = calculateWordFrequency(words);
+            Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
             List<Input> list = new ArrayList<>();
-            for (Map.Entry<String, Long> entry : map.entrySet()) {
+            for (Map.Entry<String, Long> entry : wordFrequencyMap.entrySet()) {
                 Input input = new Input(entry.getKey(), entry.getValue().intValue());
                 list.add(input);
             }
