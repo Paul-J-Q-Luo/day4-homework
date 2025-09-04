@@ -14,10 +14,7 @@ public class WordFrequencyGame {
             }
 
             Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
-            List<Input> inputList = wordFrequencyMap.entrySet().stream()
-                    .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
-                    .sorted((input1, input2) -> Integer.compare(input2.getWordCount(), input1.getWordCount()))
-                    .toList();
+            List<Input> inputList = createSortedWordFrequencies(wordFrequencyMap);
 
             StringJoiner joiner = new StringJoiner("\n");
             for (Input w : inputList) {
@@ -28,6 +25,13 @@ public class WordFrequencyGame {
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private static List<Input> createSortedWordFrequencies(Map<String, Long> wordFrequencyMap) {
+        return wordFrequencyMap.entrySet().stream()
+                .map(entry -> new Input(entry.getKey(), entry.getValue().intValue()))
+                .sorted((input1, input2) -> Integer.compare(input2.getWordCount(), input1.getWordCount()))
+                .toList();
     }
 
     private static Map<String, Long> calculateWordFrequency(String[] words) {
