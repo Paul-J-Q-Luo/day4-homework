@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -11,18 +13,11 @@ public class WordFrequencyGame {
                 return inputStr + " 1";
             }
 
-            List<Input> inputList = new ArrayList<>();
-            for (String s : words) {
-                Input input = new Input(s, 1);
-                inputList.add(input);
-            }
-
-            //get the map for the next step of sizing the same word
-            Map<String, List<Input>> map = getListMap(inputList);
-
+            List<Input> inputList;
+            Map<String, Long> map = Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
             List<Input> list = new ArrayList<>();
-            for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
-                Input input = new Input(entry.getKey(), entry.getValue().size());
+            for (Map.Entry<String, Long> entry : map.entrySet()) {
+                Input input = new Input(entry.getKey(), entry.getValue().intValue());
                 list.add(input);
             }
             inputList = list;
