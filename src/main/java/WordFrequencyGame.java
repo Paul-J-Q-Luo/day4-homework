@@ -14,10 +14,10 @@ public class WordFrequencyGame {
             }
 
             Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
-            List<Input> inputList = createSortedWordFrequencies(wordFrequencyMap);
+            List<Input> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
 
             StringJoiner joiner = new StringJoiner("\n");
-            for (Input w : inputList) {
+            for (Input w : sortedWordFrequencies) {
                 String s = w.getValue() + " " + w.getWordCount();
                 joiner.add(s);
             }
