@@ -14,7 +14,7 @@ public class WordFrequencyGame {
             }
 
             List<Input> inputList;
-            Map<String, Long> map = Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            Map<String, Long> map = calculateWordFrequency(words);
             List<Input> list = new ArrayList<>();
             for (Map.Entry<String, Long> entry : map.entrySet()) {
                 Input input = new Input(entry.getKey(), entry.getValue().intValue());
@@ -33,6 +33,10 @@ public class WordFrequencyGame {
         } catch (Exception e) {
             return "Calculate Error";
         }
+    }
+
+    private static Map<String, Long> calculateWordFrequency(String[] words) {
+        return Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     private String[] splitInputString(String inputStr) {
