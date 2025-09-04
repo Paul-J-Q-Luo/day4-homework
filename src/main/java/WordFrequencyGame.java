@@ -5,12 +5,12 @@ public class WordFrequencyGame {
     public static final String WHITESPACE_REGEX = "\\s+";
 
     public String getResult(String inputStr) {
-        if (inputStr.split(WHITESPACE_REGEX).length == 1) {
+        if (splitInputString(inputStr).length == 1) {
             return inputStr + " 1";
         } else {
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split(WHITESPACE_REGEX);
+                String[] arr = splitInputString(inputStr);
 
                 List<Input> inputList = new ArrayList<>();
                 for (String s : arr) {
@@ -40,6 +40,10 @@ public class WordFrequencyGame {
                 return "Calculate Error";
             }
         }
+    }
+
+    private String[] splitInputString(String inputStr) {
+        return inputStr.split(WHITESPACE_REGEX);
     }
 
 
