@@ -8,6 +8,8 @@ public class WordFrequencyGame {
 
     public String getResult(String inputStr) {
         try {
+            validateInput(inputStr);
+
             String[] words = splitInputString(inputStr);
             if (words.length == 1) {
                 return formatSingleWordResult(inputStr);
@@ -17,7 +19,13 @@ public class WordFrequencyGame {
             List<WordFrequency> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
             return composeOutput(sortedWordFrequencies);
         } catch (Exception e) {
-            return "Calculate Error";
+            return "Invalid input format：" + e.getMessage();
+        }
+    }
+
+    private void validateInput(String inputStr) {
+        if (inputStr == null || inputStr.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be null or empty");
         }
     }
 
