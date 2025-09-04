@@ -13,9 +13,9 @@ public class WordFrequencyGame {
                 return formatSingleWordResult(inputStr);
             }
 
-            Map<String, Long> wordFrequencyMap = calculateWordFrequency(words);
+            Map<String, Long> wordFrequencyMap = countFrequencies(words);
             List<Input> sortedWordFrequencies = createSortedWordFrequencies(wordFrequencyMap);
-            return formatResult(sortedWordFrequencies);
+            return composeOutput(sortedWordFrequencies);
         } catch (Exception e) {
             return "Calculate Error";
         }
@@ -25,7 +25,7 @@ public class WordFrequencyGame {
         return inputStr + " 1";
     }
 
-    private String formatResult(List<Input> wordFrequencies) {
+    private String composeOutput(List<Input> wordFrequencies) {
         return wordFrequencies.stream()
                 .map(input -> input.getValue() + " " + input.getWordCount())
                 .collect(Collectors.joining("\n"));
@@ -38,7 +38,7 @@ public class WordFrequencyGame {
                 .toList();
     }
 
-    private static Map<String, Long> calculateWordFrequency(String[] words) {
+    private static Map<String, Long> countFrequencies(String[] words) {
         return Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
