@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -12,7 +14,7 @@ public class WordFrequencyGame {
 
             String[] words = splitInputString(inputStr);
             if (words.length == 1) {
-                return formatSingleWordResult(inputStr);
+                return inputStr + " 1";
             }
 
             Map<String, Long> wordFrequencyMap = countFrequencies(words);
@@ -27,10 +29,6 @@ public class WordFrequencyGame {
         if (inputStr == null || inputStr.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty");
         }
-    }
-
-    private static String formatSingleWordResult(String inputStr) {
-        return inputStr + " 1";
     }
 
     private String composeOutput(List<WordFrequency> wordFrequencies) {
