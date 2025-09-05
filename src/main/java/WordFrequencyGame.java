@@ -12,7 +12,7 @@ public class WordFrequencyGame {
         try {
             validateInput(inputStr);
 
-            String[] words = splitInputString(inputStr);
+            String[] words = inputStr.split(WHITESPACE_REGEX);
             if (words.length == 1) {
                 return inputStr + " 1";
             }
@@ -46,10 +46,6 @@ public class WordFrequencyGame {
 
     private static Map<String, Long> countFrequencies(String[] words) {
         return Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
-    private String[] splitInputString(String inputStr) {
-        return inputStr.split(WHITESPACE_REGEX);
     }
 
     private record WordFrequency(String word, int count) {
